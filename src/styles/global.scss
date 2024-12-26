@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --background: #F2F2F2;
+  --text: #2E2E2E;
+  --accent: #FFC107;
+  --link: #FF5722;
+  --divider: #424242;
+}
+
+body {
+  color: var(--text);
+  background: var(--background);
+  font-family: Helvetica-Regular;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.2s ease-out;
+
+  &:hover {
+    color: var(--link);
+  }
+}

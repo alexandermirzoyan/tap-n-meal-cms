@@ -1,0 +1,13 @@
+.nav {
+  &--container {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 24px;
+
+    a {
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    }
+  }
+}

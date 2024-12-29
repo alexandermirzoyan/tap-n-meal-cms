@@ -1,0 +1,9 @@
+.dashboard {
+  &--layout {
+    display: flex;
+  }
+
+  &--content {
+    flex: 1;
+  }
+}

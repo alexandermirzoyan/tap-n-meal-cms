@@ -2,6 +2,7 @@
 
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/Button';
 
 const Login = () => {
   const router = useRouter();
@@ -14,7 +15,7 @@ const Login = () => {
   return (
     <>
       <h1>Login page</h1>
-      <button onClick={onLoginClick}>Click me to login</button>
+      <Button onClick={onLoginClick}>Click me to login</Button>
     </>
   );
 };

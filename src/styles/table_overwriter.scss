@@ -1,0 +1,14 @@
+@import "rc-table/assets/index.css";
+
+.rc-table-content {
+  border-color: gray !important;
+}
+
+.rc-table-cell {
+  text-align: left !important;
+  border-color: gray !important;
+}
+
+.rc-table-cell-row-hover {
+  background-color: rgba(202, 202, 202, 0.5) !important;
+}

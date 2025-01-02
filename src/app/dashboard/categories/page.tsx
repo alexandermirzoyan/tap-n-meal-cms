@@ -17,12 +17,12 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    width: 100,
   },
   {
-    title: 'Operations',
+    title: '',
     dataIndex: '',
     key: 'operations',
+    width: 100,
     render: () => <a href='#'>Delete</a>,
   },
 ];

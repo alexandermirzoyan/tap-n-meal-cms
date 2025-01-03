@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import { request } from '@/services/request';
 import { Table } from '@/components/Table';
+import { Button } from '@/components/Button';
 import './styles.scss';
 
 const columns = [
@@ -46,8 +48,13 @@ const Categories = () => {
 
   return (
     <>
-      <h1 className='mb-24'>Categories page</h1>
-      <Table columns={columns} data={categories} onRowRemove={removeCategory} />
+      <div className='page-header-section'>
+        <h1>Categories page</h1>
+        <Link href='/dashboard/categories/create'>
+          <Button>Create</Button>
+        </Link>
+      </div>
+      <Table columns={columns} data={categories} onRowRemove={removeCategory} editBaseLink='/dashboard/categories' />
     </>
   );
 };

@@ -6,7 +6,12 @@ import { ITableProps } from '@/components/Table/types';
 import TrashIcon from '../../../public/icons/trash.png';
 import EditIcon from '../../../public/icons/edit.png';
 
-export const Table = ({ columns, data, onRowRemove }: ITableProps) => {
+export const Table = ({
+  columns,
+  data,
+  onRowRemove,
+  editBaseLink,
+}: ITableProps) => {
   const columnsWithAction = [...columns, {
     title: '',
     dataIndex: '',
@@ -17,7 +22,7 @@ export const Table = ({ columns, data, onRowRemove }: ITableProps) => {
         <button className='rc-table-action-col mr-8' onClick={() => onRowRemove(element.id)}>
           <Image alt='Trash icon' src={TrashIcon} />
         </button>
-        <Link href='/' className='rc-table-action-col'>
+        <Link href={`${editBaseLink}/${element.id}`} className='rc-table-action-col'>
           <Image alt='Edit icon' src={EditIcon} />
         </Link>
       </>

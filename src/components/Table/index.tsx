@@ -19,12 +19,12 @@ export const Table = ({
     width: 100,
     render: (element: any) => (
       <>
-        <button className='rc-table-action-col mr-8' onClick={() => onRowRemove(element.id)}>
-          <Image alt='Trash icon' src={TrashIcon} />
-        </button>
-        <Link href={`${editBaseLink}/${element.id}`} className='rc-table-action-col'>
+        <Link href={`${editBaseLink}/${element.id}`} className='rc-table-action-col mr-8'>
           <Image alt='Edit icon' src={EditIcon} />
         </Link>
+        <button className='rc-table-action-col' onClick={() => onRowRemove(element.id)}>
+          <Image alt='Trash icon' src={TrashIcon} />
+        </button>
       </>
     ),
   }];

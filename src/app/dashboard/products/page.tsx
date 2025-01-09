@@ -84,7 +84,7 @@ const Products = () => {
           <Button>Create</Button>
         </Link>
       </div>
-      <Table columns={columns} data={products} />
+      <Table columns={columns} data={products} editBaseLink='/dashboard/products' />
     </>
   );
 };

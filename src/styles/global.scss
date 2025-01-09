@@ -45,6 +45,11 @@ a {
 .page-form-container {
   max-width: 600px;
 
+  .input-group-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .input-container {
     &:not(:last-child) {
       margin-bottom: 16px;

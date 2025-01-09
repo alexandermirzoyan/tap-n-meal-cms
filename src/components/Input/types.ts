@@ -6,4 +6,5 @@ export interface IInputProps {
   name?: string;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  type?: string;
 }

@@ -9,6 +9,7 @@ export const Input = ({
   name,
   value,
   onChange,
+  type = 'text',
 }: IInputProps) => {
   const inputId = name || id;
 
@@ -17,6 +18,7 @@ export const Input = ({
       <label htmlFor={inputId}>{placeholder}</label>
       <RCInput
         id={inputId}
+        type={type}
         name={name}
         value={value}
         placeholder={`Enter ${placeholder}`}

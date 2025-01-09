@@ -11,23 +11,27 @@ export const Table = ({
   data,
   onRowRemove,
   editBaseLink,
+  showActionButtons = true,
 }: ITableProps) => {
-  const columnsWithAction = [...columns, {
-    title: '',
-    dataIndex: '',
-    key: 'operations',
-    width: 100,
-    render: (element: any) => (
-      <>
-        <Link href={`${editBaseLink}/${element.id}`} className='rc-table-action-col mr-8'>
-          <Image alt='Edit icon' src={EditIcon} />
-        </Link>
-        <button className='rc-table-action-col' onClick={() => onRowRemove(element.id)}>
-          <Image alt='Trash icon' src={TrashIcon} />
-        </button>
-      </>
-    ),
-  }];
+  const columnsWithAction = [
+    ...columns,
+    ...(showActionButtons ? [{
+      title: '',
+      dataIndex: '',
+      key: 'operations',
+      width: 100,
+      render: (element: any) => (
+        <>
+          <Link href={`${editBaseLink}/${element.id}`} className='rc-table-action-col mr-8'>
+            <Image alt='Edit icon' src={EditIcon} />
+          </Link>
+          <button className='rc-table-action-col' onClick={() => onRowRemove?.(element.id)}>
+            <Image alt='Trash icon' src={TrashIcon} />
+          </button>
+        </>
+      ),
+    }] : []),
+  ];
 
   return (
     <RCTable columns={columnsWithAction} data={data} rowKey={(record: any) => record.id} />

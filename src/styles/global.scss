@@ -46,9 +46,17 @@ a {
 .page-form-container {
   max-width: 600px;
 
-  .input-group-container {
+  .input-group-container, .select-group-container {
     display: flex;
     justify-content: space-between;
+  }
+
+  .select-group-container {
+    gap: 16px;
+
+    .select--container {
+      flex: 1;
+    }
   }
 
   .input-container {

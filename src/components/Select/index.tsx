@@ -1,6 +1,8 @@
 import React from 'react';
 import NextImage from 'next/image';
-import RCSelect, { Option } from 'rc-select';
+import RCSelect from 'rc-select';
+import { FlattenOptionData } from 'rc-select/es/interface';
+import { BaseOptionType } from 'rc-select/lib/Select';
 
 import { ISelectProps } from '@/components/Select/types';
 
@@ -18,30 +20,30 @@ export const Select = ({
       value={value}
       onChange={onChange}
       placeholder={`Select ${label}`}
-    >
-      {
-        options.map((option) => {
-          const imageSrc = option?.image ? `${process.env.NEXT_PUBLIC_SERVER_ORIGIN}${option?.image}` : '';
+      options={options}
+      optionRender={(optionOrigin: FlattenOptionData<BaseOptionType>) => {
+        const { image, label: optionLabel } = optionOrigin.data;
+
+        if (image) {
+          const imageSrc = image ? `${process.env.NEXT_PUBLIC_SERVER_ORIGIN}${image}` : '';
 
           return (
-            <Option value={option.value} key={option.value}>
-              <div className='select--option-container'>
-                { option.image ? (
-                  <NextImage
-                    width={40}
-                    height={40}
-                    src={imageSrc}
-                    className='select--option-img'
-                    alt='Image preview'
-                  />
-                ) : null}
+            <div className='select--option-container'>
+              <NextImage
+                width={40}
+                height={40}
+                src={imageSrc}
+                className='select--option-img'
+                alt='Image preview'
+              />
 
-                {option.label}
-              </div>
-            </Option>
+              {optionLabel}
+            </div>
           );
-        })
-      }
-    </RCSelect>
+        }
+
+        return optionLabel;
+      }}
+    />
   </div>
 );

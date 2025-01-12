@@ -9,6 +9,7 @@ import { request } from '@/services/request';
 
 const CreateProduct = () => {
   const [categoryOptions, setCategoryOptions] = React.useState([]);
+  const [imageOptions, setImageOptions] = React.useState([]);
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,13 +24,22 @@ const CreateProduct = () => {
     const res = await request({ method: 'GET', url: '/categories' });
 
     if (res.data) {
-      const options = res.data.map((c: { id: number, name: string }) => ({ value: c.id, label: c.name }));
+      const options = res.data.map((category: { id: number, name: string }) => ({ value: category.id, label: category.name }));
       setCategoryOptions(options);
+    }
+  };
+
+  const getImages = async () => {
+    const res = await request({ method: 'GET', url: '/images' });
+    if (res?.data) {
+      const options = res.data.map((image: { id: number, path: string }) => ({ value: image.id, label: `Image #${image.id}`, image: image.path }));
+      setImageOptions(options);
     }
   };
 
   useEffect(() => {
     getCategories();
+    getImages();
   }, []);
 
   return (
@@ -53,11 +63,19 @@ const CreateProduct = () => {
         <Input type='number' name='price' placeholder='Price (AMD)' />
         <Input type='number' name='quantity' placeholder='Quantity' />
 
-        <Select
-          label='Category'
-          onChange={(value) => alert(value)}
-          options={categoryOptions}
-        />
+        <div className='select-group-container'>
+          <Select
+            label='Category'
+            onChange={(value) => alert(value)}
+            options={categoryOptions}
+          />
+
+          <Select
+            label='Image'
+            onChange={(value) => alert(value)}
+            options={imageOptions}
+          />
+        </div>
 
         <Button type='submit'>Create</Button>
       </form>

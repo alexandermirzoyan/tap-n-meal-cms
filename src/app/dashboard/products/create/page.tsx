@@ -1,12 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import { Select } from '@/components/Select';
+import { request } from '@/services/request';
 
 const CreateProduct = () => {
+  const [categoryOptions, setCategoryOptions] = React.useState([]);
+
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -15,6 +18,19 @@ const CreateProduct = () => {
 
     console.log('data :: ', data);
   };
+
+  const getCategories = async () => {
+    const res = await request({ method: 'GET', url: '/categories' });
+
+    if (res.data) {
+      const options = res.data.map((c: { id: number, name: string }) => ({ value: c.id, label: c.name }));
+      setCategoryOptions(options);
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <>
@@ -38,13 +54,9 @@ const CreateProduct = () => {
         <Input type='number' name='quantity' placeholder='Quantity' />
 
         <Select
+          label='Category'
           onChange={(value) => alert(value)}
-          options={[
-            { value: 1, label: 'Gago' },
-            { value: 2, label: 'Mago' },
-            { value: 3, label: 'Grno' },
-            { value: 4, label: 'MrdoMrdoMrdoMrdoMrdoMrdo', image: '/uploads/cover-1735044867472-453659985.JPG' },
-          ]}
+          options={categoryOptions}
         />
 
         <Button type='submit'>Create</Button>

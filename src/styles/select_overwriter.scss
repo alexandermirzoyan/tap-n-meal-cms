@@ -3,3 +3,18 @@
 .rc-select-dropdown {
   width: inherit !important;
 }
+
+.rc-select {
+  width: 100%;
+}
+
+.rc-select-selector {
+  padding: 8px 12px !important;
+  border: 1px solid var(--divider) !important;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.rc-select .rc-select-selection-placeholder {
+  opacity: .6;
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
@@ -8,16 +8,41 @@ import { Select } from '@/components/Select';
 import { request } from '@/services/request';
 
 const CreateProduct = () => {
-  const [categoryOptions, setCategoryOptions] = React.useState([]);
-  const [imageOptions, setImageOptions] = React.useState([]);
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [imageOptions, setImageOptions] = useState([]);
+  const [nameValues, setNameValues] = useState({ en: '', hy: '', ru: '' });
+  const [descriptionValues, setDescriptionValues] = useState({ en: '', hy: '', ru: '' });
+  const [price, setPrice] = useState<string | number>(0);
+  const [quantity, setQuantity] = useState<string | number>(0);
+  const [selectedCategory, setSelectedCategory] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<any>(null);
+
+  const onNameInputChange = (value: string, langCode: string) => {
+    setNameValues((prevState) => ({ ...prevState, [langCode]: value }));
+  };
+
+  const onDescriptionInputChange = (value: string, langCode: string) => {
+    setDescriptionValues((prevState) => ({ ...prevState, [langCode]: value }));
+  };
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+    const data = {
+      price,
+      quantity,
+      category_id: selectedCategory,
+      image_id: selectedImage,
+      tag_id: null,
+      name: nameValues,
+      description: descriptionValues,
+    };
 
-    console.log('data :: ', data);
+    const res = await request({ method: 'POST', url: '/products', data });
+
+    if (res?.data?.id) {
+      alert('Product created!');
+    }
   };
 
   const getCategories = async () => {
@@ -49,30 +74,30 @@ const CreateProduct = () => {
       </div>
       <form onSubmit={submit} className='page-form-container'>
         <div className='input-group-container'>
-          <Input name='name.en' placeholder='Name EN' />
-          <Input name='name.hy' placeholder='Name HY' />
-          <Input name='name.ru' placeholder='Name RU' />
+          <Input name='name.en' placeholder='Name EN' onChange={(evt) => onNameInputChange(evt.target.value, 'en')} />
+          <Input name='name.hy' placeholder='Name HY' onChange={(evt) => onNameInputChange(evt.target.value, 'hy')} />
+          <Input name='name.ru' placeholder='Name RU' onChange={(evt) => onNameInputChange(evt.target.value, 'ru')} />
         </div>
 
         <div className='input-group-container'>
-          <Input name='description.en' placeholder='Description EN' />
-          <Input name='description.hy' placeholder='Description HY' />
-          <Input name='description.ru' placeholder='Description RU' />
+          <Input name='description.en' placeholder='Description EN' onChange={(evt) => onDescriptionInputChange(evt.target.value, 'en')} />
+          <Input name='description.hy' placeholder='Description HY' onChange={(evt) => onDescriptionInputChange(evt.target.value, 'hy')} />
+          <Input name='description.ru' placeholder='Description RU' onChange={(evt) => onDescriptionInputChange(evt.target.value, 'ru')} />
         </div>
 
-        <Input type='number' name='price' placeholder='Price (AMD)' />
-        <Input type='number' name='quantity' placeholder='Quantity' />
+        <Input type='number' name='price' placeholder='Price (AMD)' onChange={(evt) => setPrice(evt.target.value)} />
+        <Input type='number' name='quantity' placeholder='Quantity' onChange={(evt) => setQuantity(evt.target.value)} />
 
-        <div className='select-group-container'>
+        <div className='select-group-container mb-24'>
           <Select
             label='Category'
-            onChange={(value) => alert(value)}
+            onChange={(value) => setSelectedCategory(value)}
             options={categoryOptions}
           />
 
           <Select
             label='Image'
-            onChange={(value) => alert(value)}
+            onChange={(value) => setSelectedImage(value)}
             options={imageOptions}
           />
         </div>

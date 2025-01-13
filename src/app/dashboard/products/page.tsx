@@ -64,16 +64,30 @@ const Products = () => {
   const [page, setPage] = useState(1);
   const [products, setProducts] = useState([]);
 
+  const getProducts = async () => {
+    const res = await request({ method: 'GET', url: `/products?page=${page}` });
+
+    if (res.data) {
+      setProducts(res.data);
+    }
+  };
+
+  const removeProduct = async (id: number) => {
+    const isRemoveConfirmed = window.confirm('Are you sure to remove ?');
+    if (!isRemoveConfirmed) {
+      return;
+    }
+
+    const res = await request({ method: 'DELETE', url: `/products/${id}` });
+    if (res.data?.affected >= 1) {
+      getProducts();
+    }
+  };
+
   useEffect(() => {
-    const getProducts = async () => {
-      const res = await request({ method: 'GET', url: `/products?page=${page}` });
-
-      if (res.data) {
-        setProducts(res.data);
-      }
-    };
-
     getProducts();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (
@@ -84,7 +98,7 @@ const Products = () => {
           <Button>Create</Button>
         </Link>
       </div>
-      <Table columns={columns} data={products} editBaseLink='/dashboard/products' />
+      <Table columns={columns} data={products} onRowRemove={removeProduct} editBaseLink='/dashboard/products' />
     </>
   );
 };

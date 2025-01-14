@@ -5,6 +5,7 @@ type RequestParams = {
   method: string;
   params?: any;
   data?: object;
+  headers?: any;
 }
 
 export const request = async ({
@@ -12,10 +13,11 @@ export const request = async ({
   method,
   params,
   data,
+  headers: customHeaders,
 } : RequestParams) => {
   // For the CMS we can pass only 'en' Language, as for creation/update we are passing an object with language
   // codes and this is just for getting the list in necessary language
-  const headers = {
+  const headers = customHeaders || {
     Language: 'en',
   };
 

@@ -15,8 +15,8 @@ export const Navigation = () => {
 
   return (
     <nav className='nav--container'>
-      <Link href='/dashboard/categories'>Categories</Link>
       <Link href='/dashboard/products'>Products</Link>
+      <Link href='/dashboard/categories'>Categories</Link>
       <Link href='/dashboard/images'>Images</Link>
       <Button onClick={onLogoutClick}>Logout</Button>
     </nav>

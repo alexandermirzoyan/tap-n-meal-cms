@@ -106,7 +106,7 @@ const Products = () => {
   return (
     <>
       <div className='page-header-section'>
-        <h1>Products page</h1>
+        <h1>Products</h1>
         <Link href='/dashboard/products/create'>
           <Button>Create</Button>
         </Link>

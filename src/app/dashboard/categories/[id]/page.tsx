@@ -10,7 +10,7 @@ const CategoryInnerPage = async ({ params }: {
   return (
     <>
       <div className='page-header-section'>
-        <h1>{`Update #${id} category`}</h1>
+        <h1>{`Update #${id} Category`}</h1>
       </div>
       <CategoryForm id={+id} />
     </>

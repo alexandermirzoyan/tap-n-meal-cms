@@ -49,7 +49,7 @@ const Categories = () => {
   return (
     <>
       <div className='page-header-section'>
-        <h1>Categories page</h1>
+        <h1>Categories</h1>
         <Link href='/dashboard/categories/create'>
           <Button>Create</Button>
         </Link>

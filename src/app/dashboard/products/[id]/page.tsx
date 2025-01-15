@@ -8,7 +8,7 @@ const ProductInnerPage = async ({ params }: {
   return (
     <>
       <div className='page-header-section'>
-        <h1>{`Update #${id} product`}</h1>
+        <h1>{`Update #${id} Product`}</h1>
       </div>
       <ProductForm id={+id} />
     </>

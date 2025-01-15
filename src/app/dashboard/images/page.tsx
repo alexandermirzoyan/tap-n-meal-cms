@@ -72,7 +72,7 @@ const Images = () => {
   return (
     <>
       <div className='page-header-section'>
-        <h1>Images page</h1>
+        <h1>Images</h1>
       </div>
       <form onSubmit={submit} className='mb-24'>
         <input type='file' id='file' name='file' accept='image/png, image/gif, image/jpeg' />

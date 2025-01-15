@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-const protectedRoutes = ['/', '/dashboard', '/dashboard/categories'];
 const publicRoutes = ['/login'];
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const isProtectedRoute = protectedRoutes.includes(path);
+  const isProtectedRoute = path.startsWith('/') || path.startsWith('/dashboard');
   const isPublicRoute = publicRoutes.includes(path);
   const isLoggedIn = (await cookies()).has('token');
 
@@ -17,7 +16,7 @@ export default async function middleware(req: NextRequest) {
   if (
     isPublicRoute
     && isLoggedIn
-    && !req.nextUrl.pathname.startsWith('/dashboard')
+    && !path.trim().startsWith('/dashboard')
   ) {
     return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
   }

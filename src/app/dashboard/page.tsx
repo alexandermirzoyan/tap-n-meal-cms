@@ -1,7 +1,7 @@
 const Dashboard = () => (
   <>
-    <h1>Dashboard page</h1>
-    <p>Hello world</p>
+    <h1>Welcome</h1>
+    <p>Manage all your data for TapNMeal from one place.</p>
   </>
 );
 

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import NextImage from 'next/image';
+import Pagination from 'rc-pagination';
 
 import { Button } from '@/components/Button';
 import { Table } from '@/components/Table';
@@ -62,6 +63,7 @@ const columns = [
 
 const Products = () => {
   const [page, setPage] = useState(1);
+  const [totalProducts, setTotalProducts] = useState(0);
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
@@ -69,6 +71,13 @@ const Products = () => {
 
     if (res.data) {
       setProducts(res.data);
+    }
+  };
+
+  const getTotalProductsCount = async () => {
+    const res = await request({ method: 'GET', url: '/products/total' });
+    if (res.data?.total) {
+      setTotalProducts(res.data.total);
     }
   };
 
@@ -90,6 +99,10 @@ const Products = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
+  useEffect(() => {
+    getTotalProductsCount();
+  }, []);
+
   return (
     <>
       <div className='page-header-section'>
@@ -99,6 +112,14 @@ const Products = () => {
         </Link>
       </div>
       <Table columns={columns} data={products} onRowRemove={removeProduct} editBaseLink='/dashboard/products' />
+      <Pagination
+        className='product--pagination'
+        align='center'
+        total={totalProducts}
+        pageSize={10}
+        current={page}
+        onChange={(newPage) => setPage(newPage)}
+      />
     </>
   );
 };

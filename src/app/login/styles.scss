@@ -1,0 +1,10 @@
+.login {
+  &--page-container {
+    max-width: 40%;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -25,9 +25,13 @@ export const Table = ({
           <Link href={`${editBaseLink}/${element.id}`} className='rc-table-action-col mr-8'>
             <Image alt='Edit icon' src={EditIcon} />
           </Link>
-          <button className='rc-table-action-col' onClick={() => onRowRemove?.(element.id)}>
-            <Image alt='Trash icon' src={TrashIcon} />
-          </button>
+          {
+            onRowRemove ? (
+              <button className='rc-table-action-col' onClick={() => onRowRemove(element.id)}>
+                <Image alt='Trash icon' src={TrashIcon} />
+              </button>
+            ) : null
+          }
         </>
       ),
     }] : []),

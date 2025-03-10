@@ -17,6 +17,7 @@ export const Navigation = () => {
     <nav className='nav--container'>
       <Link href='/dashboard/products'>Products</Link>
       <Link href='/dashboard/categories'>Categories</Link>
+      <Link href='/dashboard/orders'>Orders</Link>
       <Link href='/dashboard/images'>Images</Link>
       <Button onClick={onLogoutClick}>Logout</Button>
     </nav>
